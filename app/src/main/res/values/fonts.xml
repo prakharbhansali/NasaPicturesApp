@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="regular">fonts/Ubuntu-Regular.ttf</string>
+    <string name="bold">fonts/Ubuntu-Bold.ttf</string>
+    <string name="light">fonts/Ubuntu-Light.ttf</string>
+
+</resources>

@@ -13,6 +13,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -149,5 +151,26 @@ public class Utils {
             e.printStackTrace();
         }
         return calendar;
+    }
+
+    public static String readJsonStringFromAssetFile(Context context, String fileName) {
+
+        String result = "";
+
+        try {
+
+            InputStream is = context.getAssets().open(fileName);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            result = new String(buffer, "UTF-8");
+
+        } catch (IOException e) {
+            showLogDefault(TAG, "exception: " + e.getMessage());
+            return "";
+        }
+
+        return result;
     }
 }

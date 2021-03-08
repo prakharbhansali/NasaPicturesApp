@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.exercise.nasagallery.R;
 import com.exercise.nasagallery.common.Utils;
 import com.exercise.nasagallery.datamodels.ImageModel;
+import com.exercise.nasagallery.interfaces.listItemEvent;
 
 import java.util.ArrayList;
 
@@ -20,10 +21,12 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
 
     private Context context;
     private ArrayList<ImageModel> list;
+    private com.exercise.nasagallery.interfaces.listItemEvent listItemEvent;
 
-    public ImageListAdapter(Context context, ArrayList<ImageModel> list) {
+    public ImageListAdapter(Context context, ArrayList<ImageModel> list, listItemEvent listItemEvent) {
         this.context = context;
         this.list = list;
+        this.listItemEvent = listItemEvent;
     }
 
     @NonNull
@@ -52,6 +55,14 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
             }
 
             Utils.setGlideImage(context, model.getUrl(), holder.ivImage, R.drawable.default_image);
+
+            holder.ivImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    listItemEvent.onListItemClick(position);
+                }
+            });
         }
     }
 

@@ -14,4 +14,8 @@ public class AppConstants {
     public static final int REPLACE_FRAGMENT = 0;
 
     public static final String DATE_FORMAT_YYYY_MM_DD = "yyyy-MM-dd";
+    public static final String DATE_FORMAT_DD_MMM_YYYY = "dd MMM yyyy";
+    public static final String TAG_LIST_ITEM_POSITION = "list_item_pos";
+    public static final String TAG_IMAGE_LIST = "image_list";
+    public static final String TAG_IMAGE_MODEL = "image_model";
 }

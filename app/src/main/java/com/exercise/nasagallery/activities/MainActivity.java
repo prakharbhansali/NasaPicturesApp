@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.exercise.nasagallery.BaseActivity;
 import com.exercise.nasagallery.R;
 import com.exercise.nasagallery.fragments.HomeFragment;
+import com.exercise.nasagallery.fragments.ImageFragment;
 
 public class MainActivity extends BaseActivity {
 
@@ -44,6 +45,8 @@ public class MainActivity extends BaseActivity {
 
         if (getSupportFragmentManager().findFragmentById(myFrame.getId()) instanceof HomeFragment) {
             finish();
+        } else if (getSupportFragmentManager().findFragmentById(myFrame.getId()) instanceof ImageFragment) {
+            getSupportFragmentManager().popBackStack();
         } else {
             super.onBackPressed();
         }

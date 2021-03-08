@@ -19,9 +19,9 @@
             android:layout_margin="@dimen/_10sdp"
             android:background="@drawable/bg_primarydark_rounded_corners"
             android:paddingLeft="@dimen/_10sdp"
-            android:paddingTop="@dimen/_5sdp"
+            android:paddingTop="@dimen/_7sdp"
             android:paddingRight="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_7sdp"
             android:text="@string/nasa_gallery"
             android:textAlignment="center" />
 

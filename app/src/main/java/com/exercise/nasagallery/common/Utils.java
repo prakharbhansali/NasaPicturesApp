@@ -1,17 +1,26 @@
 package com.exercise.nasagallery.common;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -67,6 +76,45 @@ public class Utils {
             if (imageView != null) {
 
                 imageView.setImageResource(defImage);
+            }
+        }
+    }
+
+    public static void setGlideImage(Context mContext, String path, ImageView imageView, Integer defImage, View progressLayout) {
+
+        if (mContext != null && path != null && !path.isEmpty() && imageView != null) {
+
+            Glide.with(mContext)
+                    .asBitmap()
+                    .load(path)
+                    .override(400, 400)
+                    .placeholder(defImage)
+                    .error(defImage)
+                    .into(new CustomTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+
+                            imageView.setImageBitmap(resource);
+                            imageView.setVisibility(View.VISIBLE);
+                            progressLayout.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                            imageView.setImageDrawable(placeholder);
+                            imageView.setVisibility(View.VISIBLE);
+                            progressLayout.setVisibility(View.GONE);
+                        }
+                    });
+
+        } else {
+
+            if (imageView != null) {
+
+                imageView.setImageResource(defImage);
+                imageView.setVisibility(View.VISIBLE);
+                progressLayout.setVisibility(View.GONE);
             }
         }
     }
@@ -172,5 +220,25 @@ public class Utils {
         }
 
         return result;
+    }
+
+    public static int getScreenWidthInDp(Activity activity) {
+
+        int width = 0;
+
+        DisplayMetrics displayMetrics = activity.getResources().getDisplayMetrics();
+        width = (int) (displayMetrics.widthPixels / displayMetrics.density);
+
+        return width;
+    }
+
+    public static int getScreenHeightInDp(Activity activity) {
+
+        int height = 0;
+
+        DisplayMetrics displayMetrics = activity.getResources().getDisplayMetrics();
+        height = (int) (displayMetrics.heightPixels / displayMetrics.density);
+
+        return height;
     }
 }

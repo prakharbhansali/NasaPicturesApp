@@ -13,14 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.exercise.nasagallery.BaseFragment;
 import com.exercise.nasagallery.R;
 import com.exercise.nasagallery.adapters.ImageListAdapter;
+import com.exercise.nasagallery.common.AppConstants;
 import com.exercise.nasagallery.common.SpacesItemDecoration;
+import com.exercise.nasagallery.common.Utils;
 import com.exercise.nasagallery.datamodels.ImageModel;
 import com.exercise.nasagallery.interfaces.HomeContract;
+import com.exercise.nasagallery.interfaces.listItemEvent;
 import com.exercise.nasagallery.presenters.HomePresenter;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends BaseFragment implements HomeContract.myView {
+public class HomeFragment extends BaseFragment implements HomeContract.myView, listItemEvent {
 
     private static String TAG = HomeFragment.class.getSimpleName();
 
@@ -79,7 +82,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.myView {
         gridLayoutManager = new GridLayoutManager(getContext(), 2);
         rvImagesList.setLayoutManager(gridLayoutManager);
 
-        imageListAdapter = new ImageListAdapter(getContext(), imagesList);
+        imageListAdapter = new ImageListAdapter(getContext(), imagesList, this);
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen._5sdp);
 
         rvImagesList.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
@@ -127,5 +130,17 @@ public class HomeFragment extends BaseFragment implements HomeContract.myView {
         rvImagesList.setVisibility(View.GONE);
         tvErrorMsg.setVisibility(View.VISIBLE);
         tvErrorMsg.setText(msg);
+    }
+
+    @Override
+    public void onListItemClick(int itemPos) {
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(AppConstants.TAG_LIST_ITEM_POSITION, itemPos);
+        bundle.putParcelableArrayList(AppConstants.TAG_IMAGE_LIST, imagesList);
+        ImageFragment fragment = new ImageFragment();
+        fragment.setArguments(bundle);
+
+        Utils.showFragment(getActivity(), R.id.myFrame, fragment, ImageFragment.class.getSimpleName(), AppConstants.REPLACE_FRAGMENT);
     }
 }

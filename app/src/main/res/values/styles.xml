@@ -42,4 +42,22 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="TextViewStyle_Regular_12_White">
+        <item name="textViewFontFamily">@string/regular</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextViewStyle_Light_10_PrimaryColor">
+        <item name="textViewFontFamily">@string/light</item>
+        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="TextViewStyle_Regular_14_PrimaryColor">
+        <item name="textViewFontFamily">@string/regular</item>
+        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
 </resources>
